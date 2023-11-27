@@ -1,0 +1,61 @@
+package com.crud.demo.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.crud.demo.models.Issue;
+import com.crud.demo.services.IssueService;
+
+@RestController
+@RequestMapping("/api/issues")
+@CrossOrigin(origins = "http://localhost:4200")
+public class IssueController {
+	
+	 private final IssueService issueService;
+
+    @Autowired
+    public IssueController(IssueService issueService) {
+        this.issueService = issueService;
+    }
+    
+     // Get all issues
+    @GetMapping
+    public List<Issue> getAllIssues() {
+        return issueService.getAllIssues();
+    }
+
+    // Get issue by ID
+    @GetMapping("/{id}")
+    public Issue getIssueById(@PathVariable Long id) {
+        return issueService.getIssueById(id);
+    }
+    
+     // Create a new issue
+    @PostMapping
+    public Issue createIssue(@RequestBody Issue issue) {
+        return issueService.createIssue(issue);
+    }
+
+    // Update an existing issue
+    @PutMapping("/{id}")
+    public Issue updateIssue(@PathVariable Long id, @RequestBody Issue issue) {
+        return issueService.updateIssue(id, issue);
+    }
+    // Delete an issue by ID
+    @DeleteMapping("/{id}")
+    public void deleteIssue(@PathVariable Long id) {
+        issueService.deleteIssue(id);
+    }
+    
+
+}

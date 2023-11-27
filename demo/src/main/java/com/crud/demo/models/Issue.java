@@ -1,0 +1,46 @@
+package com.crud.demo.models;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Data
+@Table(name = "issues")
+@Entity
+public class Issue {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id") // Define the column name
+    private Long id;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "identifier")
+    private String identifier;
+
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "priority")
+    private String priority;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "assigned_to")
+    private String assignedTo;
+
+    @Column(name = "date_reported")
+    private LocalDate dateReported;
+
+    @Column(name = "date_due")
+    private LocalDate dateDue;
+
+}

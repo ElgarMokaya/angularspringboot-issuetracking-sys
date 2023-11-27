@@ -1,0 +1,33 @@
+package com.crud.demo.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.crud.demo.models.User;
+import com.crud.demo.repositories.UserRepository;
+
+import DTO.UserDTO;
+
+@Service
+public class UserServiceImpl implements UserService {
+	
+	
+	private final UserRepository userRepository;
+	//private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	@Override
+	public void registerUser(UserDTO userDTO) {
+		User user= new User();
+		user.setUsername(userDTO.getUsername());
+		user.setEmail(userDTO.getEmail());
+		
+		userRepository.save(user);
+		
+	}
+
+}
